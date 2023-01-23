@@ -11,7 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "users")
-public class PersonEntity {
+public class UserEntity {
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -22,8 +22,8 @@ public class PersonEntity {
     @Column(name = "first_name",nullable = false)
      protected String name;
 
-    @Column(name = "rol",nullable = false)
-    protected String rol;
+    @Column(name = "role",nullable = false)
+    protected String role;
 
     @Column(name = "email", nullable = false, unique = true)
     protected String email;

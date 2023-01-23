@@ -5,14 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class StudentEntityRequest {
+public class ProfessorRequest {
 
-    private String birthday;
-
-    private String history;
+    @NotBlank(message = "Surname cannot be empty or null.")
+    private String surname;
 }

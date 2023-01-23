@@ -1,18 +1,15 @@
-package com.gonzalez.desafioquinto.model.request;
+package com.gonzalez.desafioquinto.model.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProfessorEntityRequest {
+public class ProfessorResponse {
 
-    @NotBlank(message = "Surname cannot be empty or null.")
     private String surname;
 }

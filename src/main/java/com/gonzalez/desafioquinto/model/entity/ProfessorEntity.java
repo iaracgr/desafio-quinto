@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "professor")
-public class ProfessorEntity extends PersonEntity {
+public class ProfessorEntity extends UserEntity {
 
     @Column(name = "last_name", nullable = false)
     protected String surname;

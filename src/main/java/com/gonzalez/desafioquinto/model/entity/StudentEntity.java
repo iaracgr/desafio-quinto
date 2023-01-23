@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "student")
-public class StudentEntity extends PersonEntity{
+public class StudentEntity extends UserEntity {
 
     @Column(name = "birthday")
     protected String birthday; // todo:change to calendar type

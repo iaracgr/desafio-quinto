@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PersonEntityRequest {
+public class UserRequest {
 
     @NotBlank(message = "First name cannot be empty or null.")
     private String firstName;
@@ -27,6 +27,6 @@ public class PersonEntityRequest {
     @Size(min = 6,message="The password must be at least eight characters.")
     private String password;
 
-    @NotBlank(message = "ROL cannot be empty or null.")
-    private String rol;
+    @NotBlank(message = "ROLE cannot be empty or null.")
+    private String role;
 }
