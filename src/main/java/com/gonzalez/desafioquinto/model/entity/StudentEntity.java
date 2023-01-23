@@ -1,13 +1,16 @@
 package com.gonzalez.desafioquinto.model.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Data
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "student")
 public class StudentEntity extends PersonEntity{
 

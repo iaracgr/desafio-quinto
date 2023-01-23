@@ -1,12 +1,15 @@
 package com.gonzalez.desafioquinto.model.entity;
 
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "users")
 public class PersonEntity {
 
@@ -21,6 +24,12 @@ public class PersonEntity {
 
     @Column(name = "rol",nullable = false)
     protected String rol;
+
+    @Column(name = "email", nullable = false, unique = true)
+    protected String email;
+
+    @Column(name = "password")
+    protected String password;
 
     @Column(name = "soft_delete",nullable = false)
     protected boolean softDelete=false;
