@@ -3,15 +3,16 @@ package com.gonzalez.desafioquinto.model.entity;
 import lombok.*;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Entity
+@Entity(name = "student")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "student")
+@DiscriminatorValue("2")
 public class StudentEntity extends UserEntity {
 
     @Column(name = "birthday")
