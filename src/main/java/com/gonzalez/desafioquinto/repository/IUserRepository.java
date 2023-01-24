@@ -10,10 +10,6 @@ import java.util.List;
 @Repository
 public interface IUserRepository extends JpaRepository<UserEntity,String> {
 
-    UserEntity findByNameAndSoftDeleteFalse(String name);
-
-    UserEntity findByRole(String role);
-
     UserEntity findByUserIdAndSoftDeleteFalse(String id);
 
     List<UserEntity> findAll();

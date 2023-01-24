@@ -11,7 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name="users")
-public class UserEntity {
+public class UserEntity { // perfil administrador
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -30,5 +30,7 @@ public class UserEntity {
 
     @Column(name = "soft_delete",nullable = false)
     private boolean softDelete=false;
+
+    public boolean isEnabled() { return !softDelete; }
 
 }

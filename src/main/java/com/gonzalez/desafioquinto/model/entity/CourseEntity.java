@@ -26,10 +26,10 @@ public class CourseEntity {
     @Column(name = "course_name")
     private String name;
 
-    @Column(name = "daytime") // turno
+    @Column(name = "daytime") // turno: mañana,tarde,noche
     private String daytime;
 
-    @Column(name = "schedule") // horario: mañana,tarde,noche
+    @Column(name = "schedule") // horario
     private String schedule;
 
     @Column(name = "students")
@@ -42,4 +42,8 @@ public class CourseEntity {
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<ProfessorEntity> professorsList;
 
+    @Column(name = "soft_delete",nullable = false)
+    private boolean softDelete=false;
+
+    public boolean isEnabled() { return !softDelete; }
 }
