@@ -24,7 +24,7 @@ public class ProfessorController {
     @Autowired
     private IProfessorService iProfessorService;
 
-    @PostMapping("/create")
+/*    @PostMapping("/create")
     public ResponseEntity<ProfessorResponse> create(@RequestBody ProfessorRequest request) {
         ProfessorResponse response;
         try {
@@ -34,7 +34,7 @@ public class ProfessorController {
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
 
-    }
+    }*/
 
     @PutMapping("/update")
     public ResponseEntity<ProfessorResponse> update(@Valid @RequestBody UpdateProfessorRequest request) {

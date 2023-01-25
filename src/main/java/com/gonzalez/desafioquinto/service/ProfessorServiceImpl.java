@@ -3,12 +3,10 @@ package com.gonzalez.desafioquinto.service;
 import com.gonzalez.desafioquinto.mapper.ProfessorMapper;
 import com.gonzalez.desafioquinto.model.entity.CourseEntity;
 import com.gonzalez.desafioquinto.model.entity.ProfessorEntity;
+import com.gonzalez.desafioquinto.model.entity.UserEntity;
 import com.gonzalez.desafioquinto.model.request.ProfessorRequest;
 import com.gonzalez.desafioquinto.model.request.UpdateProfessorRequest;
-import com.gonzalez.desafioquinto.model.response.CourseResponse;
-import com.gonzalez.desafioquinto.model.response.ListCourseResponse;
-import com.gonzalez.desafioquinto.model.response.ListProfessorResponse;
-import com.gonzalez.desafioquinto.model.response.ProfessorResponse;
+import com.gonzalez.desafioquinto.model.response.*;
 import com.gonzalez.desafioquinto.repository.IProfessorRepository;
 import com.gonzalez.desafioquinto.service.abstraction.IProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,20 +29,26 @@ public class ProfessorServiceImpl implements IProfessorService {
     @Autowired
     private ProfessorMapper professorMapper;
 
+    @Autowired
+    private UserServiceImpl userService;
     @Lazy
     @Autowired
     private CourseServiceImpl courseService;
 
-    @Override
-    public ProfessorResponse create(ProfessorRequest request) throws EntityExistsException {
-        if (emailExist(request.getEmail()) == false) {
-            ProfessorEntity professor = professorMapper.map(request);
+   /* @Override
+    public ProfessorResponse create(ProfessorRequest request) throws Exception {
+        ProfessorEntity professor = professorMapper.map(request);
+        ProfessorResponse response = professorMapper.map(professorRepository.save(professor));
+        if (request.getIdUser().isEmpty()) {
+            throw new IllegalArgumentException("you need to specified user");
         } else {
-            throw new EntityExistsException("Email already in use");
+            UserResponse user = userService.getByEmail(request.getEmail());
+
         }
         ProfessorEntity professor = professorMapper.map(request);
         return professorMapper.map(professorRepository.save(professor));
-    }
+    }*/
+
 
     public Boolean emailExist(String email) {
         Optional<ProfessorEntity> optional = Optional.ofNullable(professorRepository.findByEmailAndSoftDeleteFalse(email));
@@ -53,6 +57,23 @@ public class ProfessorServiceImpl implements IProfessorService {
         } else {
             return true;
         }
+    }
+
+    @Override
+    public ProfessorResponse createProfessor(String idUser) throws Exception {
+        UserResponse user = userService.getById(idUser);
+        ProfessorEntity professor = null;
+        if (user.getDescription() == "PROFESSOR_STANDARD_USER") {
+            professor = new ProfessorEntity();
+            professor.setProfessorId(user.getUserId());
+            professor.setName(user.getFirstName());
+            professor.setEmail(user.getEmail());
+            professor.setPassword(user.getPassword());
+        } else {
+            throw new Exception();
+        }
+        ProfessorResponse response = professorMapper.map(professorRepository.save(professor));
+        return  response;
     }
 
     @Override
@@ -85,7 +106,7 @@ public class ProfessorServiceImpl implements IProfessorService {
         professor.setName(request.getName());
         professor.setSurname(request.getSurname());
         List<CourseEntity> courses = new ArrayList<>();
-        for (String courseId : request.getIdCourse()){
+        for (String courseId : request.getIdCourse()) {
             CourseEntity course = courseService.getByIdAndSoftDeleteFalse(courseId);
             courses.add(course);
         }

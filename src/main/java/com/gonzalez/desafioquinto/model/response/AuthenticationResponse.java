@@ -9,23 +9,13 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserResponse {
-
-    private String userId;
-
-    private String firstName;
+public class AuthenticationResponse {
 
     private String email;
 
-    private String role;
-
-    private String description;
+    private String name;
 
     private String token;
 
-    private String password;
-
-    private Boolean softDelete;
-
-
+    private String userId;
 }

@@ -21,7 +21,7 @@ public class UserController {
     @Autowired
     private IUserService iUserService;
 
-    @PostMapping("/create")
+   /* @PostMapping("/create")
     public ResponseEntity<UserResponse> create(@Valid @RequestBody UserRequest request) {
         UserResponse userResponse;
         try {
@@ -30,7 +30,7 @@ public class UserController {
             throw new RuntimeException(e);
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(userResponse);
-    }
+    }*/
 
     @PutMapping("/update")
     public ResponseEntity<UserResponse> update(@Valid @RequestBody UpdateUserRequest request) throws Exception {
@@ -47,6 +47,10 @@ public class UserController {
     @GetMapping("find/{id}")
     public ResponseEntity<UserResponse> findUser (@PathVariable String id) throws EntityNotFoundException{
         return ResponseEntity.ok(iUserService.getById(id));
+    }
+    @GetMapping("find/{email}")
+    public ResponseEntity<UserResponse> findUserByEmail (@PathVariable String email) throws EntityNotFoundException{
+        return ResponseEntity.ok(iUserService.getByEmail(email));
     }
     @GetMapping ("list")
     public ResponseEntity<ListUserResponse> getAll (){

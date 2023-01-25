@@ -14,11 +14,11 @@ public class ProfessorMapper {
 
     public ProfessorResponse map (ProfessorEntity professorEntity){
         ProfessorResponse response = new ProfessorResponse();
-        response.setId(professorEntity.getProfessorId());
+       // response.setId(professorEntity.getProfessorId());
         response.setName(professorEntity.getName());
         response.setSurname(professorEntity.getSurname());
         response.setEmail(professorEntity.getEmail());
-        response.setRole(professorEntity.getRole());
+      //  response.setRole(professorEntity.getRole());
         response.setSoftDelete(professorEntity.getSoftDelete());
         List<String> names = new ArrayList<>();
         List<CourseEntity> courses = professorEntity.getCourses();
@@ -29,13 +29,14 @@ public class ProfessorMapper {
         return response;
     }
 
-    public ProfessorEntity map (ProfessorRequest request){
+    public ProfessorEntity map (ProfessorRequest request, String password){
         ProfessorEntity professor = new ProfessorEntity();
         professor.setName(request.getName());
         professor.setSurname(request.getSurname());
         professor.setEmail(request.getEmail());
-        professor.setRole(request.getRole());
         professor.setCourseId(request.getIdCourse());
+        professor.setProfessorId(request.getIdUser());
+        professor.setPassword(password);
         return professor;
     }
 
