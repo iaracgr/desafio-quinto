@@ -66,7 +66,7 @@ public class ProfessorServiceImpl implements IProfessorService {
         if (user.getDescription() == "PROFESSOR_STANDARD_USER") {
             professor = new ProfessorEntity();
             professor.setProfessorId(user.getUserId());
-            professor.setName(user.getFirstName());
+            professor.setName(user.getName());
             professor.setEmail(user.getEmail());
             professor.setPassword(user.getPassword());
         } else {

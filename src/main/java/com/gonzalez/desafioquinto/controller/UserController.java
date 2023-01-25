@@ -4,6 +4,7 @@ import com.gonzalez.desafioquinto.model.request.UpdateUserRequest;
 import com.gonzalez.desafioquinto.model.request.UserRequest;
 import com.gonzalez.desafioquinto.model.response.ListUserResponse;
 import com.gonzalez.desafioquinto.model.response.UserResponse;
+import com.gonzalez.desafioquinto.service.abstraction.IRegisterUser;
 import com.gonzalez.desafioquinto.service.abstraction.IUserService;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
@@ -18,6 +20,8 @@ import javax.validation.Valid;
 @RequestMapping("/user")
 public class UserController {
 
+    @Autowired
+    private IRegisterUser iRegisterUser;
     @Autowired
     private IUserService iUserService;
 
@@ -31,7 +35,11 @@ public class UserController {
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(userResponse);
     }*/
-
+   @PostMapping("/professor")
+   public ResponseEntity<UserResponse> register(@RequestBody @Valid UserRequest request) throws EntityExistsException {
+       UserResponse response = iRegisterUser.registerProfessor(request);
+       return ResponseEntity.status(HttpStatus.CREATED).body(response);
+   }
     @PutMapping("/update")
     public ResponseEntity<UserResponse> update(@Valid @RequestBody UpdateUserRequest request) throws Exception {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(iUserService.update(request));

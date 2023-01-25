@@ -14,7 +14,7 @@ public class UserMapper {
     public UserResponse map(UserEntity user){
         UserResponse userResponse = new UserResponse();
         userResponse.setUserId(user.getUserId());
-        userResponse.setFirstName(user.getName());
+        userResponse.setName(user.getName());
         userResponse.setEmail(user.getEmail());
         userResponse.setDescription(user.getDescription());
         userResponse.setRole(user.getRoles().get(0).getName());

@@ -1,26 +1,32 @@
 package com.gonzalez.desafioquinto.service;
 
+import com.gonzalez.desafioquinto.auth.RoleType;
 import com.gonzalez.desafioquinto.auth.config.filter.JwtUtils;
 import com.gonzalez.desafioquinto.mapper.UserMapper;
 import com.gonzalez.desafioquinto.model.entity.UserEntity;
 import com.gonzalez.desafioquinto.model.request.AuthenticationRequest;
 import com.gonzalez.desafioquinto.model.request.UpdateUserRequest;
+import com.gonzalez.desafioquinto.model.request.UserRequest;
 import com.gonzalez.desafioquinto.model.response.AuthenticationResponse;
 import com.gonzalez.desafioquinto.model.response.ListUserResponse;
 import com.gonzalez.desafioquinto.model.response.UserResponse;
+import com.gonzalez.desafioquinto.repository.IRoleRepository;
 import com.gonzalez.desafioquinto.repository.IUserRepository;
+import com.gonzalez.desafioquinto.service.abstraction.IRegisterUser;
 import com.gonzalez.desafioquinto.service.abstraction.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class  UserServiceImpl implements IUserService {
+public class  UserServiceImpl implements IUserService, IRegisterUser {
 
     @Autowired
     IUserRepository userRepository;
@@ -33,6 +39,12 @@ public class  UserServiceImpl implements IUserService {
 
     @Autowired
    private    AuthenticationManager authenticationManager;
+
+    @Autowired
+    BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    IRoleRepository roleRepository;
 
     private ListUserResponse buildListResponse(List<UserEntity> users) {
         List<UserResponse> userResponses = userMapper.map(users);
@@ -103,6 +115,21 @@ public class  UserServiceImpl implements IUserService {
         UserEntity user = findBy(id);
         user.setSoftDelete(true);
         userRepository.save(user);
+
+    }
+    @Override
+    public UserResponse registerProfessor(UserRequest request) throws EntityExistsException {
+        if (userRepository.findByEmailAndSoftDeleteFalse(request.getEmail()) != null) {
+            throw new EntityExistsException();
+        }
+        UserEntity user = userMapper.map(request,  passwordEncoder.encode(request.getPassword()));
+        user.setRoles(List.of(roleRepository.findByName(RoleType.PROFESSOR.getFullRoleName())));
+        user.setDescription("PROFESSOR_STANDARD_USER");
+
+        UserResponse response = userMapper.map(userRepository.save(user));
+
+        response.setToken(jwtUtils.generateToken(user));
+        return response;
 
     }
 }
