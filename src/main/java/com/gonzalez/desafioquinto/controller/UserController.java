@@ -26,10 +26,10 @@ public class UserController {
         UserResponse userResponse;
         try {
             userResponse = iUserService.create(request);
-            return ResponseEntity.status(HttpStatus.CREATED).body(userResponse);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        return ResponseEntity.status(HttpStatus.CREATED).body(userResponse);
     }
 
     @PutMapping("/update")
