@@ -24,7 +24,7 @@ public class CourseEntity {
     @Column(name = "course_id")
     private String courseId;
 
-    @Column(name = "course_name")
+    @Column(name = "course_name",nullable = false,unique = true)
     private String name;
 
     @Column(name = "daytime") // turno: mañana,tarde,noche
@@ -42,7 +42,7 @@ public class CourseEntity {
     private List<ProfessorEntity> professorsList =new ArrayList<>();
 
     @Column(name = "soft_delete",nullable = false)
-    private boolean softDelete=false;
+    private Boolean softDelete=false;
 
     public boolean isEnabled() { return !softDelete; }
 
