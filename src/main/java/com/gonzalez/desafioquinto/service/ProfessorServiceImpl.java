@@ -35,21 +35,6 @@ public class ProfessorServiceImpl implements IProfessorService {
     @Autowired
     private CourseServiceImpl courseService;
 
-   /* @Override
-    public ProfessorResponse create(ProfessorRequest request) throws Exception {
-        ProfessorEntity professor = professorMapper.map(request);
-        ProfessorResponse response = professorMapper.map(professorRepository.save(professor));
-        if (request.getIdUser().isEmpty()) {
-            throw new IllegalArgumentException("you need to specified user");
-        } else {
-            UserResponse user = userService.getByEmail(request.getEmail());
-
-        }
-        ProfessorEntity professor = professorMapper.map(request);
-        return professorMapper.map(professorRepository.save(professor));
-    }*/
-
-
     public Boolean emailExist(String email) {
         Optional<ProfessorEntity> optional = Optional.ofNullable(professorRepository.findByEmailAndSoftDeleteFalse(email));
         if (optional.isEmpty()) {

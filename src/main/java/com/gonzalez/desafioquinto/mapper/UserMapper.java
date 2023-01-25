@@ -21,12 +21,12 @@ public class UserMapper {
         return userResponse;
     }
 
-    public UserEntity map(UserRequest request,String passwordEncrypted){
-        UserEntity user = new UserEntity();
-        user.setName(request.getName());
-        user.setEmail(request.getEmail());
-        user.setPassword(passwordEncrypted);
-        return user;
+    public UserEntity map(UserRequest request, String passwordEncrypted) {
+        UserEntity userRegister = new UserEntity();
+        userRegister.setName(request.getName());
+        userRegister.setEmail(request.getEmail());
+        userRegister.setPassword(passwordEncrypted);
+        return userRegister;
     }
     public List<UserResponse> map(List<UserEntity> users) {
         List<UserResponse> responses = new ArrayList<>(users.size());

@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class  UserServiceImpl implements IUserService, IRegisterUser {
+public class UserServiceImpl implements IUserService, IRegisterUser {
 
     @Autowired
     IUserRepository userRepository;
@@ -35,10 +35,10 @@ public class  UserServiceImpl implements IUserService, IRegisterUser {
     UserMapper userMapper;
 
     @Autowired
-      private JwtUtils jwtUtils;
+    private JwtUtils jwtUtils;
 
     @Autowired
-   private    AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
@@ -59,15 +59,15 @@ public class  UserServiceImpl implements IUserService, IRegisterUser {
         if (user == null) {
             throw new EntityNotFoundException("User not found");
         }
-        return userMapper.map(user);  
+        return userMapper.map(user);
     }
 
     @Override
     public UserResponse getByEmail(String email) throws EntityNotFoundException {
-      UserEntity user = userRepository.findByEmail(email);
-      if (user == null){
-          throw new EntityNotFoundException("User not found");
-      }
+        UserEntity user = userRepository.findByEmail(email);
+        if (user == null) {
+            throw new EntityNotFoundException("User not found");
+        }
         return userMapper.map(user);
     }
 
@@ -77,12 +77,12 @@ public class  UserServiceImpl implements IUserService, IRegisterUser {
         return buildListResponse(users);
     }
 
-    private UserEntity findBy (String id){
+    private UserEntity findBy(String id) {
         Optional<UserEntity> opt = Optional.ofNullable(userRepository.findByUserIdAndSoftDeleteFalse(id));
-    if (opt.isEmpty()){
-        throw new EntityNotFoundException("User not found.");
-    }
-    return opt.get();
+        if (opt.isEmpty()) {
+            throw new EntityNotFoundException("User not found.");
+        }
+        return opt.get();
     }
 
     @Override
@@ -99,7 +99,7 @@ public class  UserServiceImpl implements IUserService, IRegisterUser {
         if (user == null) {
             throw new Exception("Invalid email.");
         }
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword()));
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
 
         return new AuthenticationResponse(user.getEmail(), user.getName(), user.getUserId(), jwtUtils.generateToken(user));
     }
@@ -117,14 +117,15 @@ public class  UserServiceImpl implements IUserService, IRegisterUser {
         userRepository.save(user);
 
     }
+
     @Override
     public UserResponse registerProfessor(UserRequest request) throws EntityExistsException {
         if (userRepository.findByEmailAndSoftDeleteFalse(request.getEmail()) != null) {
             throw new EntityExistsException();
         }
-        UserEntity user = userMapper.map(request,  passwordEncoder.encode(request.getPassword()));
+        UserEntity user = userMapper.map(request, passwordEncoder.encode(request.getPassword()));
         user.setRoles(List.of(roleRepository.findByName(RoleType.PROFESSOR.getFullRoleName())));
-        user.setDescription("PROFESSOR_STANDARD_USER");
+        user.setDescription("STANDARD_USER");
 
         UserResponse response = userMapper.map(userRepository.save(user));
 

@@ -24,18 +24,6 @@ public class ProfessorController {
     @Autowired
     private IProfessorService iProfessorService;
 
-/*    @PostMapping("/create")
-    public ResponseEntity<ProfessorResponse> create(@RequestBody ProfessorRequest request) {
-        ProfessorResponse response;
-        try {
-            response = iProfessorService.create(request);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
-
-    }*/
-
     @PostMapping("/create")
     public ResponseEntity<ProfessorResponse> create (@PathVariable String idUser){
         ProfessorResponse response = null;
