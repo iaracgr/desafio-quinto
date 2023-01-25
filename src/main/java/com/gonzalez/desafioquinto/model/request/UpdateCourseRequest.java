@@ -16,15 +16,16 @@ import java.util.List;
 @NoArgsConstructor
 public class UpdateCourseRequest {
 
+    private String id;
     private String name;
 
     private String daytime;
 
     private String schedule;
 
-    private List<ProfessorEntity> professors;
+/*    private List<ProfessorEntity> professors;
 
-    private List<StudentEntity> students;
+    private List<StudentEntity> students;*/
 
 
 }

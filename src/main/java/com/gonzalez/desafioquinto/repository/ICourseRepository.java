@@ -14,6 +14,8 @@ public interface ICourseRepository extends JpaRepository<CourseEntity,String> {
 
     CourseEntity findByCourseId(String id);
 
+    CourseEntity findByName(String name);
+
     List<CourseEntity> findAll ();
 
 
