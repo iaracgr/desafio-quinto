@@ -26,9 +26,9 @@ public class ProfessorController {
 
     @PostMapping("/create")
     public ResponseEntity<ProfessorResponse> create(@RequestBody ProfessorRequest request) {
-       ProfessorResponse response;
+        ProfessorResponse response;
         try {
-             response = iProfessorService.create(request);
+            response = iProfessorService.create(request);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -43,14 +43,14 @@ public class ProfessorController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> delete (@PathVariable String id) throws EntityNotFoundException {
+    public ResponseEntity<Void> delete(@PathVariable String id) throws EntityNotFoundException {
         iProfessorService.deleteProfessor(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @PostMapping("addCourse/{idCourse}/to/{idProfessor}")
     public ResponseEntity<ProfessorResponse> addProfessorToCourse(@PathVariable final String idCourse,
-                                                     @PathVariable final String idProfessor) {
+                                                                  @PathVariable final String idProfessor) {
         ProfessorResponse response;
         try {
             response = iProfessorService.addProfessorToCourse(idProfessor, idCourse);
@@ -62,7 +62,7 @@ public class ProfessorController {
 
     @PostMapping("/removeCourse/{idCourse}/from/{idProfessor}")
     public ResponseEntity<ProfessorResponse> removeCourse(@PathVariable final String idCourse,
-                                                        @PathVariable final String idProfessor) {
+                                                          @PathVariable final String idProfessor) {
         ProfessorResponse response = null;
         try {
             response = iProfessorService.removeProfessorFromCourse(idProfessor, idCourse);
@@ -73,17 +73,17 @@ public class ProfessorController {
     }
 
     @GetMapping("find/{id}")
-    public ResponseEntity<ProfessorEntity> findById (@PathVariable String id) throws EntityNotFoundException{
+    public ResponseEntity<ProfessorEntity> findById(@PathVariable String id) throws EntityNotFoundException {
         return ResponseEntity.ok(iProfessorService.getByIdAndSoftDeleteFalse(id));
     }
 
     @GetMapping("find/{name}")
-    public ResponseEntity<ProfessorResponse> findByName (@PathVariable String name) throws EntityNotFoundException{
+    public ResponseEntity<ProfessorResponse> findByName(@PathVariable String name) throws EntityNotFoundException {
         return ResponseEntity.ok(iProfessorService.getByNameAndSoftDeleteFalse(name));
     }
 
-    @GetMapping ("list")
-    public ResponseEntity<ListProfessorResponse> getAll (){
+    @GetMapping("list")
+    public ResponseEntity<ListProfessorResponse> getAll() {
         return ResponseEntity.ok().body(iProfessorService.getProfessors());
     }
 
