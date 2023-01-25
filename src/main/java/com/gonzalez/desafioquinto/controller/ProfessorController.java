@@ -36,6 +36,17 @@ public class ProfessorController {
 
     }*/
 
+    @PostMapping("/create")
+    public ResponseEntity<ProfessorResponse> create (@PathVariable String idUser){
+        ProfessorResponse response = null;
+        try {
+            response = iProfessorService.createProfessor(idUser);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
     @PutMapping("/update")
     public ResponseEntity<ProfessorResponse> update(@Valid @RequestBody UpdateProfessorRequest request) {
 
