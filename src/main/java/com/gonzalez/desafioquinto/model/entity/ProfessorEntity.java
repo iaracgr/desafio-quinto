@@ -20,6 +20,9 @@ public class ProfessorEntity {
     @Column(name = "professor_id")
     private   String professorId;
 
+  /*  @Column(name = "professor_id")
+    private   String professorId;*/
+
     @Column(name = "first_name",nullable = false)
     private String name;
 
@@ -28,6 +31,9 @@ public class ProfessorEntity {
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
+
+    @Column(name = "password")
+    private String password;
 
     @Column(name = "soft_delete",nullable = false)
     private Boolean softDelete=false;
@@ -42,6 +48,17 @@ public class ProfessorEntity {
             inverseJoinColumns = @JoinColumn(name = "course_id")
     )
     private List<CourseEntity> courses = new ArrayList<>();
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "professors_users",
+            joinColumns = @JoinColumn(name = "professor_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<UserEntity> users;
+
+    @Column(name = "user_id")
+    private String user_id;
 
     @Column(name = "course_id")
     private String courseId;

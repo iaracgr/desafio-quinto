@@ -1,6 +1,5 @@
 package com.gonzalez.desafioquinto.model.response;
 
-import com.gonzalez.desafioquinto.model.entity.CourseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

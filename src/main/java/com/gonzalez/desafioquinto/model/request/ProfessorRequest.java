@@ -22,11 +22,10 @@ public class ProfessorRequest {
     @Email(message = "Email is not valid.")
     private String email;
 
-    @NotBlank(message = "ROLE cannot be empty or null.")
-    private String role;
-
     @NotBlank(message = "Surname cannot be empty or null.")
     private String surname;
 
     private String idCourse;
+
+    private String idUser;
 }

@@ -9,6 +9,10 @@ import java.util.List;
 @Repository
 public interface IUserRepository extends JpaRepository<UserEntity,String> {
 
+    UserEntity findByEmailAndSoftDeleteFalse(String email);
+
+    UserEntity findByEmail(String email);
+
     UserEntity findByUserIdAndSoftDeleteFalse(String id);
 
     List<UserEntity> findAll();

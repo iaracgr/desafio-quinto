@@ -14,17 +14,19 @@ public class UserMapper {
     public UserResponse map(UserEntity user){
         UserResponse userResponse = new UserResponse();
         userResponse.setUserId(user.getUserId());
-        userResponse.setFirstName(user.getName());
+        userResponse.setName(user.getName());
         userResponse.setEmail(user.getEmail());
-     return userResponse;
+        userResponse.setDescription(user.getDescription());
+        userResponse.setRole(user.getRoles().get(0).getName());
+        return userResponse;
     }
 
-    public UserEntity map(UserRequest request){
-        UserEntity user = new UserEntity();
-        user.setName(request.getName());
-        user.setRole(request.getRole());
-        user.setEmail(request.getEmail());
-        return user;
+    public UserEntity map(UserRequest request, String passwordEncrypted) {
+        UserEntity userRegister = new UserEntity();
+        userRegister.setName(request.getName());
+        userRegister.setEmail(request.getEmail());
+        userRegister.setPassword(passwordEncrypted);
+        return userRegister;
     }
     public List<UserResponse> map(List<UserEntity> users) {
         List<UserResponse> responses = new ArrayList<>(users.size());

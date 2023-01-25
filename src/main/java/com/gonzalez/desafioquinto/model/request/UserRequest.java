@@ -23,6 +23,8 @@ public class UserRequest {
     @Email(message = "Email is not valid.")
     private String email;
 
-    @NotBlank(message = "ROLE cannot be empty or null.")
-    private String role;
+    @NotBlank(message = "Password cannot be empty or null.")
+    @Size(min = 8,message="The password must be at least eight characters.")
+    private String password;
+
 }
