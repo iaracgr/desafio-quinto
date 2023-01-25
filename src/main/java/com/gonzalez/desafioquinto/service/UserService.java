@@ -1,4 +1,3 @@
-/*
 package com.gonzalez.desafioquinto.service;
 
 import com.gonzalez.desafioquinto.mapper.UserMapper;
@@ -27,23 +26,20 @@ public class UserService implements IUserService {
     @Autowired
     UserMapper userMapper;
 
-    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Override
-    public UserResponse getByName(String name) throws EntityNotFoundException {
-        UserEntity user = userRepository.findByNameAndSoftDeleteFalse(name);
-        if (user == null) {
-            throw new EntityNotFoundException("User not found.");
-        }
-        return userMapper.map(user);
-    }
-
     private ListUserResponse buildListResponse(List<UserEntity> users) {
         List<UserResponse> userResponses = userMapper.map(users);
         ListUserResponse listUserResponse = new ListUserResponse();
         listUserResponse.setUserResponses(userResponses);
         return listUserResponse;
+    }
+
+    @Override
+    public UserResponse getById(String id) throws EntityNotFoundException {
+        UserEntity user = userRepository.findByUserIdAndSoftDeleteFalse(id);
+        if (user == null) {
+            throw new EntityNotFoundException("User not found");
+        }
+        return userMapper.map(user);
     }
 
     @Override
@@ -62,18 +58,16 @@ public class UserService implements IUserService {
 
     @Override
     public UserResponse update(UpdateUserRequest updateUserRequest) throws Exception {
-        UserEntity user = userRepository.findByNameAndSoftDeleteFalse(updateUserRequest.getFirstName());
+        UserEntity user = userRepository.findByUserIdAndSoftDeleteFalse(updateUserRequest.getUserId());
         user.setName(updateUserRequest.getFirstName());
         user.setEmail(updateUserRequest.getEmail());
-        //  user.setPassword(bCryptPasswordEncoder.encode(updateUserRequest.getPassword()));
         user.setRole(updateUserRequest.getRole());
         return null;
     }
 
     @Override
     public UserResponse create(UserRequest request) throws EntityExistsException {
-        UserEntity user = userMapper.map(request, request.getPassword());
-        user.setPassword(bCryptPasswordEncoder.encode(request.getPassword()));
+        UserEntity user = userMapper.map(request);
         return userMapper.map(userRepository.save(user));
     }
 
@@ -85,4 +79,3 @@ public class UserService implements IUserService {
 
     }
 }
-*/
