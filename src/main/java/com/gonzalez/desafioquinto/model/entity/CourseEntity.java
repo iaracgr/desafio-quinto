@@ -50,15 +50,15 @@ public class CourseEntity {
         studentsList.add(student);
     }
 
-    public void addBook(ProfessorEntity professor) {
+    public void addProfessor(ProfessorEntity professor) {
         professorsList.add(professor);
     }
 
-    public void removeBook(StudentEntity student) {
+    public void removeStudent(StudentEntity student) {
         studentsList.remove(student);
     }
 
-    public void removeBook(ProfessorEntity professor) {
+    public void removeProfessor(ProfessorEntity professor) {
         professorsList.remove(professor);
     }
 

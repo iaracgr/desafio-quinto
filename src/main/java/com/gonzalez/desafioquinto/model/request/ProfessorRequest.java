@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProfessorRequest {
+
     @NotBlank(message = "First name cannot be empty or null.")
     private String name;
 

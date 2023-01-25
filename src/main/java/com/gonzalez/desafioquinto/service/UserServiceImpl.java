@@ -9,7 +9,6 @@ import com.gonzalez.desafioquinto.model.response.UserResponse;
 import com.gonzalez.desafioquinto.repository.IUserRepository;
 import com.gonzalez.desafioquinto.service.abstraction.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityExistsException;
@@ -18,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService implements IUserService {
+public class UserServiceImpl implements IUserService {
 
     @Autowired
     IUserRepository userRepository;
@@ -39,7 +38,7 @@ public class UserService implements IUserService {
         if (user == null) {
             throw new EntityNotFoundException("User not found");
         }
-        return userMapper.map(user);
+        return userMapper.map(user);  
     }
 
     @Override
