@@ -12,6 +12,8 @@ public interface IStudentRepository extends JpaRepository<StudentEntity,String >
 
     StudentEntity findByStudentIdAndSoftDeleteFalse (String id);
 
+    StudentEntity findByEmailAndSoftDeleteFalse (String email);
+
     StudentEntity findByName(String name);
 
     List<StudentEntity> findAll ();

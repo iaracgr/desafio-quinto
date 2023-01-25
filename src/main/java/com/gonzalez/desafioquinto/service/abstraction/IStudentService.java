@@ -14,9 +14,9 @@ public interface IStudentService {
 
     StudentResponse update (UpdateStudentRequest request);
 
-    StudentResponse addStudentToCourse (String idStudent, String idCourse);
+    StudentResponse addStudentToCourse (String idStudent, String idCourse) throws Exception;
 
-    StudentResponse removeStudentFromCourse (String idStudent, String idCourse);
+    StudentResponse removeStudentFromCourse (String idStudent, String idCourse) throws Exception;
 
     ListStudentResponse getStudents ();
 
@@ -24,6 +24,6 @@ public interface IStudentService {
 
     StudentEntity getById (String id) throws EntityNotFoundException;
 
-    StudentResponse delete (String id) throws EntityNotFoundException;
+    void delete (String id) throws EntityNotFoundException;
 
 }
