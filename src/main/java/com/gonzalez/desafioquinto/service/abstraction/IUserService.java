@@ -10,7 +10,7 @@ import javax.persistence.EntityNotFoundException;
 
 public interface IUserService {
 
-    UserResponse getByName(String name) throws EntityNotFoundException;
+    UserResponse getById(String id) throws EntityNotFoundException;
 
     ListUserResponse getAll();
 

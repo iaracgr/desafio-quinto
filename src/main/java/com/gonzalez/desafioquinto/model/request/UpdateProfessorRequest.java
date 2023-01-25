@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Getter
@@ -13,6 +14,9 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class UpdateProfessorRequest {
 
-    @NotBlank(message = "Surname cannot be null or empty.")
+    private String name;
+
     private String surname;
+
+    private String idCourse;
 }

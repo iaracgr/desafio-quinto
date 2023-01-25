@@ -17,15 +17,11 @@ import javax.validation.constraints.Size;
 public class UserRequest {
 
     @NotBlank(message = "First name cannot be empty or null.")
-    private String firstName;
+    private String name;
 
     @NotBlank(message = "Email cannot be empty or null.")
     @Email(message = "Email is not valid.")
     private String email;
-
-    @NotBlank(message = "Password cannot be empty or null.")
-    @Size(min = 6,message="The password must be at least eight characters.")
-    private String password;
 
     @NotBlank(message = "ROLE cannot be empty or null.")
     private String role;

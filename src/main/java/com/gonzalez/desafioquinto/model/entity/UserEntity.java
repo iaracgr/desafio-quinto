@@ -11,31 +11,26 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name="users")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="user_type",
-        discriminatorType = DiscriminatorType.INTEGER)
-public class UserEntity {
+public class UserEntity { // perfil administrador
 
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Column(name = "user_id")
-    protected  String userId;
+    private   String userId;
 
     @Column(name = "first_name",nullable = false)
-     protected String name;
+     private String name;
 
     @Column(name = "role",nullable = false)
-    protected String role;
+    private String role;
 
     @Column(name = "email", nullable = false, unique = true)
-    protected String email;
-
-    @Column(name = "password")
-    protected String password;
+    private String email;
 
     @Column(name = "soft_delete",nullable = false)
-    protected boolean softDelete=false;
+    private boolean softDelete=false;
 
-    //todo: agregar atributo curso.
+    public boolean isEnabled() { return !softDelete; }
+
 }

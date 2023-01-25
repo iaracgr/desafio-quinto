@@ -7,6 +7,8 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,15 +24,42 @@ public class CourseEntity {
     @Column(name = "course_id")
     private String courseId;
 
-    @Column(name = "course_name")
+    @Column(name = "course_name",nullable = false,unique = true)
     private String name;
 
-    @Column(name = "daytime") // turno
+    @Column(name = "daytime") // turno: mañana,tarde,noche
     private String daytime;
 
     @Column(name = "schedule") // horario
     private String schedule;
 
-// todo: agregar manytomany of users
+    @JoinColumn(name = "course_id")
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<StudentEntity> studentsList = new ArrayList<>();
+
+    @JoinColumn(name = "course_id")
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ProfessorEntity> professorsList =new ArrayList<>();
+
+    @Column(name = "soft_delete",nullable = false)
+    private Boolean softDelete=false;
+
+    public boolean isEnabled() { return !softDelete; }
+
+    public void addStudent(StudentEntity student) {
+        studentsList.add(student);
+    }
+
+    public void addBook(ProfessorEntity professor) {
+        professorsList.add(professor);
+    }
+
+    public void removeBook(StudentEntity student) {
+        studentsList.remove(student);
+    }
+
+    public void removeBook(ProfessorEntity professor) {
+        professorsList.remove(professor);
+    }
 
 }

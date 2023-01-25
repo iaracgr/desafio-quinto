@@ -5,19 +5,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserResponse {
+public class CourseResponse {
 
-    private String userId;
+    private String courseId;
 
-    private String firstName;
+    private String name;
 
-    private String email;
+    private String daytime;
 
-    private String role;
+    private String schedule;
+
+    private List<String> professorsName;
+
+    private List<String> studentsName;
 
     private Boolean softDelete;
 
