@@ -5,7 +5,6 @@ import com.gonzalez.desafioquinto.model.request.CourseRequest;
 import com.gonzalez.desafioquinto.model.request.UpdateCourseRequest;
 import com.gonzalez.desafioquinto.model.response.CourseResponse;
 import com.gonzalez.desafioquinto.model.response.ListCourseResponse;
-import com.jayway.jsonpath.internal.filter.ValueNodes;
 
 import javax.persistence.EntityNotFoundException;
 
