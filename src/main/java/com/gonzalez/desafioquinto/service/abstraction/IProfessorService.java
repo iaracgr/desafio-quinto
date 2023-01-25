@@ -15,9 +15,9 @@ public interface IProfessorService {
 
     ProfessorResponse create (ProfessorRequest request) throws EntityExistsException;
 
-    ProfessorResponse addProfessorToCourse (String idProfessor, String idCourse);
+    ProfessorResponse addProfessorToCourse (String idProfessor, String idCourse) throws Exception;
 
-    ProfessorResponse deleteProfessorFromCourse ( String idProfessor, String idCourse);
+    ProfessorResponse removeProfessorFromCourse ( String idProfessor, String idCourse) throws Exception;
 
     ProfessorResponse update (UpdateProfessorRequest request);
 
@@ -27,6 +27,6 @@ public interface IProfessorService {
 
     ProfessorEntity getByIdAndSoftDeleteFalse (String id) throws EntityNotFoundException;
 
-    ProfessorResponse delete(String id) throws EntityNotFoundException;
+    void deleteProfessor (String id) throws EntityNotFoundException;
 
 }

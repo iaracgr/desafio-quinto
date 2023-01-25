@@ -7,16 +7,18 @@ import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateProfessorRequest {
+    private String idProfessor;
 
     private String name;
 
     private String surname;
 
-    private String idCourse;
+    private List<String> idCourse;
 }

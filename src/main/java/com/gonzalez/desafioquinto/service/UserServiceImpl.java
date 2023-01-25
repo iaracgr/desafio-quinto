@@ -38,7 +38,7 @@ public class UserServiceImpl implements IUserService {
         if (user == null) {
             throw new EntityNotFoundException("User not found");
         }
-        return userMapper.map(user);
+        return userMapper.map(user);  
     }
 
     @Override

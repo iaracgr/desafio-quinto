@@ -17,6 +17,7 @@ import java.util.List;
 public class UpdateCourseRequest {
 
     private String id;
+
     private String name;
 
     private String daytime;

@@ -49,7 +49,7 @@ public class ProfessorEntity {
 
     public void addCourse(CourseEntity course){courses.add(course);}
 
-    public void deleteCourse(CourseEntity course){courses.remove(course);}
+    public void removeCourse(CourseEntity course){courses.remove(course);}
 
 
 }
