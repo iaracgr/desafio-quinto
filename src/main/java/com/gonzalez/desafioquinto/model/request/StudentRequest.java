@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 
 @Getter
@@ -25,9 +26,12 @@ public class StudentRequest {
     @NotBlank(message = "ROLE cannot be empty or null.")
     private String role;
 
+    private String age;
+
     private String birthday;
 
     private String history;
 
     private String idCourse;
+
 }

@@ -21,9 +21,9 @@ public class CourseResponse {
 
     private String schedule;
 
-    private List<ProfessorResponse> professors;
+    private List<String> professorsName;
 
-    private List<StudentResponse> students;
+    private List<String> studentsName;
 
     private Boolean softDelete;
 

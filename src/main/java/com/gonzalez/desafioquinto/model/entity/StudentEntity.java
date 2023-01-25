@@ -29,7 +29,10 @@ public class StudentEntity {
     private String email;
 
     @Column(name = "soft_delete",nullable = false)
-    private boolean softDelete=false;
+    private Boolean softDelete=false;
+
+    @Column(name = "age")
+    private String age;
 
     @Column(name = "birthday")
     private String birthday; // todo:change to calendar type
@@ -37,13 +40,18 @@ public class StudentEntity {
     @Column(name = "history")
     private String history;
 
-    @Column(name ="student_courses" )
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "student_courses",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
     private List<CourseEntity> courses;
 
     @Column(name = "course_id")
     private String courseId;
     public boolean isEnabled() { return !softDelete; }
-
+    public void addCourse(CourseEntity course){courses.add(course);}
+    public void deleteCourse(CourseEntity course){courses.remove(course);}
 
 }

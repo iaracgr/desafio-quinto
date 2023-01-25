@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -32,18 +33,33 @@ public class CourseEntity {
     @Column(name = "schedule") // horario
     private String schedule;
 
-    @Column(name = "students")
     @JoinColumn(name = "course_id")
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    private List<StudentEntity> studentsList;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<StudentEntity> studentsList = new ArrayList<>();
 
-    @Column(name = "professor")
     @JoinColumn(name = "course_id")
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    private List<ProfessorEntity> professorsList;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ProfessorEntity> professorsList =new ArrayList<>();
 
     @Column(name = "soft_delete",nullable = false)
     private boolean softDelete=false;
 
     public boolean isEnabled() { return !softDelete; }
+
+    public void addStudent(StudentEntity student) {
+        studentsList.add(student);
+    }
+
+    public void addBook(ProfessorEntity professor) {
+        professorsList.add(professor);
+    }
+
+    public void removeBook(StudentEntity student) {
+        studentsList.remove(student);
+    }
+
+    public void removeBook(ProfessorEntity professor) {
+        professorsList.remove(professor);
+    }
+
 }
