@@ -3,8 +3,10 @@ package com.gonzalez.desafioquinto.service;
 import com.gonzalez.desafioquinto.mapper.ProfessorMapper;
 import com.gonzalez.desafioquinto.model.entity.CourseEntity;
 import com.gonzalez.desafioquinto.model.entity.ProfessorEntity;
+import com.gonzalez.desafioquinto.model.entity.StudentEntity;
 import com.gonzalez.desafioquinto.model.entity.UserEntity;
 import com.gonzalez.desafioquinto.model.request.ProfessorRequest;
+import com.gonzalez.desafioquinto.model.request.StudentRequest;
 import com.gonzalez.desafioquinto.model.request.UpdateProfessorRequest;
 import com.gonzalez.desafioquinto.model.response.*;
 import com.gonzalez.desafioquinto.repository.IProfessorRepository;
@@ -44,7 +46,7 @@ public class ProfessorServiceImpl implements IProfessorService {
         }
     }
 
-    @Override
+   /* @Override
     public ProfessorResponse createProfessor(String idUser) throws Exception {
         UserResponse user = userService.getById(idUser);
         ProfessorEntity professor = null;
@@ -53,12 +55,21 @@ public class ProfessorServiceImpl implements IProfessorService {
             professor.setProfessorId(user.getUserId());
             professor.setName(user.getName());
             professor.setEmail(user.getEmail());
-            professor.setPassword(user.getPassword());
         } else {
             throw new Exception();
         }
         ProfessorResponse response = professorMapper.map(professorRepository.save(professor));
-        return  response;
+        return  response;*/
+
+    @Override
+    public ProfessorResponse create(ProfessorRequest request) throws EntityExistsException {
+        if (emailExist(request.getEmail()) == false) {
+            ProfessorEntity professor = professorMapper.map(request);
+        } else {
+            throw new EntityExistsException("Email already in use");
+        }
+        ProfessorEntity professor = professorMapper.map(request);
+        return professorMapper.map(professorRepository.save(professor));
     }
 
     @Override

@@ -4,6 +4,7 @@ package com.gonzalez.desafioquinto.service;
 import com.gonzalez.desafioquinto.mapper.UserMapper;
 import com.gonzalez.desafioquinto.model.entity.UserEntity;
 import com.gonzalez.desafioquinto.model.request.UpdateUserRequest;
+import com.gonzalez.desafioquinto.model.request.UserRequest;
 import com.gonzalez.desafioquinto.model.response.ListUserResponse;
 import com.gonzalez.desafioquinto.model.response.UserResponse;
 import com.gonzalez.desafioquinto.repository.IUserRepository;
@@ -14,24 +15,19 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements IUserService, IRegisterUser {
+public class UserServiceImpl implements IUserService {
 
     @Autowired
     IUserRepository userRepository;
 
     @Autowired
     UserMapper userMapper;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    BCryptPasswordEncoder passwordEncoder;
 
 
     private ListUserResponse buildListResponse(List<UserEntity> users) {
@@ -81,11 +77,11 @@ public class UserServiceImpl implements IUserService, IRegisterUser {
         return null;
     }
 
-/*    @Override
+    @Override
     public UserResponse create(UserRequest request) throws EntityExistsException {
         UserEntity user = userMapper.map(request);
         return userMapper.map(userRepository.save(user));
-    }*/
+    }
 
     @Override
     public void delete(String id) throws EntityNotFoundException {
