@@ -30,7 +30,6 @@ public class UserEntity implements UserDetails { //
     @JoinColumn(name = "role_id", nullable = false)
     private List<RoleEntity> roles;
 
-
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 

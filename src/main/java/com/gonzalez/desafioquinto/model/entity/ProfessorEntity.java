@@ -20,9 +20,6 @@ public class ProfessorEntity {
     @Column(name = "professor_id")
     private   String professorId;
 
-  /*  @Column(name = "professor_id")
-    private   String professorId;*/
-
     @Column(name = "first_name",nullable = false)
     private String name;
 
