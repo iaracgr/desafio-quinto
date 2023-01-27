@@ -22,8 +22,6 @@ public class ProfessorResponse {
 
     private String email;
 
-    private String role;
-
     private List<String> courses;
 
     private Boolean softDelete;

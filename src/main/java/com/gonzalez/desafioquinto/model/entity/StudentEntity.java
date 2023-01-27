@@ -39,8 +39,10 @@ public class StudentEntity {
     @Column(name = "history")
     private String history;
 
-    @Column( name = "role", nullable = false)
-    private String role;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id", nullable = false)
+    protected List<RoleEntity> roles;
 
     @ManyToMany(mappedBy = "studentsList")
     private List<CourseEntity> courses;

@@ -24,8 +24,6 @@ public class StudentRequest {
     @Email(message = "Email is not valid.")
     private String email;
 
-    private String role;
-
     private String age;
 
     private Date birthday;

@@ -1,15 +1,14 @@
 package com.gonzalez.desafioquinto.service;
 
+import com.gonzalez.desafioquinto.config.RoleType;
 import com.gonzalez.desafioquinto.mapper.ProfessorMapper;
-import com.gonzalez.desafioquinto.model.entity.CourseEntity;
-import com.gonzalez.desafioquinto.model.entity.ProfessorEntity;
-import com.gonzalez.desafioquinto.model.entity.StudentEntity;
-import com.gonzalez.desafioquinto.model.entity.UserEntity;
+import com.gonzalez.desafioquinto.model.entity.*;
 import com.gonzalez.desafioquinto.model.request.ProfessorRequest;
 import com.gonzalez.desafioquinto.model.request.StudentRequest;
 import com.gonzalez.desafioquinto.model.request.UpdateProfessorRequest;
 import com.gonzalez.desafioquinto.model.response.*;
 import com.gonzalez.desafioquinto.repository.IProfessorRepository;
+import com.gonzalez.desafioquinto.repository.IRoleRepository;
 import com.gonzalez.desafioquinto.service.abstraction.IProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -29,10 +28,9 @@ public class ProfessorServiceImpl implements IProfessorService {
     private IProfessorRepository professorRepository;
 
     @Autowired
-    private ProfessorMapper professorMapper;
-
+    private IRoleRepository iRoleRepository;
     @Autowired
-    private UserServiceImpl userService;
+    private ProfessorMapper professorMapper;
     @Lazy
     @Autowired
     private CourseServiceImpl courseService;
@@ -69,6 +67,7 @@ public class ProfessorServiceImpl implements IProfessorService {
             throw new EntityExistsException("Email already in use");
         }
         ProfessorEntity professor = professorMapper.map(request);
+        professor.setRoles(List.of((iRoleRepository.findByName(RoleType.PROFESSOR))));
         return professorMapper.map(professorRepository.save(professor));
     }
 

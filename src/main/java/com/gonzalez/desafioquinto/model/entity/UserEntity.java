@@ -30,6 +30,11 @@ public class UserEntity implements UserDetails { // is for Admin creation
     private String email;
 
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id", nullable = false)
+    protected List<RoleEntity> roles;
+
+
     @Column (name = "description")
     private String description;
 
