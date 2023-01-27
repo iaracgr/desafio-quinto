@@ -27,5 +27,4 @@ public class ProfessorRequest {
 
     private String idCourse;
 
-    private String idUser;
 }

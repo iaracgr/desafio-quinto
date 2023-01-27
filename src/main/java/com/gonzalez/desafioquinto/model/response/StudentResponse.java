@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -13,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class StudentResponse {
 
-    private String id;
+    private String idStudent;
 
     private String name;
 
@@ -21,7 +22,7 @@ public class StudentResponse {
 
     private String age;
 
-    private String birthday;
+    private Date birthday;
 
     private String history;
 
