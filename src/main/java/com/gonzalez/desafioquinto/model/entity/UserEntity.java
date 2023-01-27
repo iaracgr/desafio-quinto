@@ -34,10 +34,6 @@ public class UserEntity implements UserDetails { // is for Admin creation
     @JoinColumn(name = "role_id", nullable = false)
     protected List<RoleEntity> roles;
 
-
-    @Column (name = "description")
-    private String description;
-
     @Column(name = "soft_delete",nullable = false)
     private boolean softDelete=false;
 

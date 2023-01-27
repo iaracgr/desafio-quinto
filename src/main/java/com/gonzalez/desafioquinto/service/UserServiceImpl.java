@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
@@ -84,10 +85,12 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    @Transactional(rollbackFor = {Exception.class})
     public UserResponse create(UserRequest request) throws EntityExistsException {
         UserEntity user = userMapper.map(request);
         user.setRoles(List.of((iRoleRepository.findByName(RoleType.ADMIN))));
-        return userMapper.map(userRepository.save(user));
+        UserResponse response = userMapper.map(userRepository.save(user));
+        return response;
     }
 
     @Override

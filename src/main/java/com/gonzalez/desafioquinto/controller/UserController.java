@@ -6,6 +6,7 @@ import com.gonzalez.desafioquinto.model.request.UserRequest;
 import com.gonzalez.desafioquinto.model.response.AuthenticationResponse;
 import com.gonzalez.desafioquinto.model.response.ListUserResponse;
 import com.gonzalez.desafioquinto.model.response.UserResponse;
+import com.gonzalez.desafioquinto.service.UserServiceImpl;
 import com.gonzalez.desafioquinto.service.abstraction.IRegisterUser;
 import com.gonzalez.desafioquinto.service.abstraction.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +22,11 @@ import javax.validation.Valid;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private IUserService iUserService;
+   @Autowired
+    private UserServiceImpl iUserService;
 
     @PostMapping("/create")
-    public ResponseEntity<UserResponse> register(@RequestBody @Valid UserRequest request) throws EntityExistsException {
+    public ResponseEntity<UserResponse> create(@RequestBody @Valid UserRequest request) throws EntityExistsException {
         UserResponse response = iUserService.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
