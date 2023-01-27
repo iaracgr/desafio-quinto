@@ -26,8 +26,6 @@ public class StudentResponse {
 
     private String history;
 
-    private String role;
-
     private List <String> courses;
 
     private Boolean softDelete;

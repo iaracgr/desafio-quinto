@@ -1,8 +1,10 @@
 package com.gonzalez.desafioquinto.service;
 
+import com.gonzalez.desafioquinto.config.RoleType;
 import com.gonzalez.desafioquinto.mapper.StudentMapper;
 import com.gonzalez.desafioquinto.model.entity.CourseEntity;
 import com.gonzalez.desafioquinto.model.entity.ProfessorEntity;
+import com.gonzalez.desafioquinto.model.entity.RoleEntity;
 import com.gonzalez.desafioquinto.model.entity.StudentEntity;
 import com.gonzalez.desafioquinto.model.request.StudentRequest;
 import com.gonzalez.desafioquinto.model.request.UpdateStudentRequest;
@@ -10,6 +12,7 @@ import com.gonzalez.desafioquinto.model.response.ListProfessorResponse;
 import com.gonzalez.desafioquinto.model.response.ListStudentResponse;
 import com.gonzalez.desafioquinto.model.response.ProfessorResponse;
 import com.gonzalez.desafioquinto.model.response.StudentResponse;
+import com.gonzalez.desafioquinto.repository.IRoleRepository;
 import com.gonzalez.desafioquinto.repository.IStudentRepository;
 import com.gonzalez.desafioquinto.service.abstraction.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +32,8 @@ public class StudentServiceImpl implements IStudentService {
     private IStudentRepository studentRepository;
 
     @Autowired
+    private IRoleRepository iRoleRepository;
+    @Autowired
     private StudentMapper studentMapper;
 
     @Autowired
@@ -42,6 +47,7 @@ public class StudentServiceImpl implements IStudentService {
             throw new EntityExistsException("Email already in use");
         }
         StudentEntity student = studentMapper.map(request);
+        student.setRoles(List.of((iRoleRepository.findByName(RoleType.STUDENT))));
         return studentMapper.map(studentRepository.save(student));
     }
 
@@ -62,7 +68,7 @@ public class StudentServiceImpl implements IStudentService {
         student.setBirthday(request.getBirthday());
         student.setHistory(request.getHistory());
         List<CourseEntity> courses = new ArrayList<>();
-        for (String courseId : request.getIdCourse()){
+        for (String courseId : request.getIdCourse()) {
             CourseEntity course = courseService.getByIdAndSoftDeleteFalse(courseId);
             courses.add(course);
         }
@@ -100,6 +106,7 @@ public class StudentServiceImpl implements IStudentService {
         list.setList(responses);
         return list;
     }
+
     @Override
     public ListStudentResponse getStudents() {
         List<StudentEntity> students = studentRepository.findAll();
@@ -114,6 +121,7 @@ public class StudentServiceImpl implements IStudentService {
         }
         return opt.get();
     }
+
     @Override
     public StudentResponse getByNameAndSoftDeleteFalse(String name) throws EntityNotFoundException {
         return studentMapper.map(findByNameAndSoftDeleteFalse(name));
@@ -130,7 +138,7 @@ public class StudentServiceImpl implements IStudentService {
 
     @Override
     public void delete(String id) throws EntityNotFoundException {
-        StudentEntity student =getById(id);
+        StudentEntity student = getById(id);
         student.setSoftDelete(true);
         studentRepository.save(student);
     }

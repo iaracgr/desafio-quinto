@@ -15,5 +15,8 @@ public interface IProfessorRepository extends JpaRepository <ProfessorEntity,Str
 
      ProfessorEntity findByEmailAndSoftDeleteFalse (String email);
 
+    ProfessorEntity findByEmail (String email);
+
+
     List<ProfessorEntity> findAll();
 }

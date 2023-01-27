@@ -35,8 +35,10 @@ public class ProfessorEntity {
     @Column(name = "surname", nullable = false)
     private String surname;
 
-    @Column( name = "role", nullable = false)
-    private String role;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id", nullable = false)
+    protected List<RoleEntity> roles;
 
     @ManyToMany(mappedBy = "studentsList")
     private List<CourseEntity> courses = new ArrayList<>();

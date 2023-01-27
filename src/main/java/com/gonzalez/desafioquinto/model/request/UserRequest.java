@@ -23,5 +23,4 @@ public class UserRequest {
     @Email(message = "Email is not valid.")
     private String email;
 
-
 }

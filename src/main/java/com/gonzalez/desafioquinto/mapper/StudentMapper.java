@@ -23,7 +23,6 @@ public class StudentMapper {
         studentResponse.setBirthday(studentEntity.getBirthday());
         studentResponse.setHistory(studentEntity.getHistory());
         studentResponse.setSoftDelete(studentEntity.getSoftDelete());
-        studentResponse.setRole(studentEntity.getRole());
         List<String> names = new ArrayList<>();
         List<CourseEntity> courses = studentEntity.getCourses();
         for (CourseEntity course : courses) {
@@ -41,7 +40,6 @@ public class StudentMapper {
         studentEntity.setBirthday(request.getBirthday());
         studentEntity.setHistory(request.getHistory());
         studentEntity.setCourseId(request.getIdCourse());
-        studentEntity.setRole(request.getRole());
         return studentEntity;
     }
 

@@ -18,7 +18,6 @@ public class ProfessorMapper {
         response.setName(professorEntity.getName());
         response.setSurname(professorEntity.getSurname());
         response.setEmail(professorEntity.getEmail());
-        response.setRole(professorEntity.getRole());
         response.setSoftDelete(professorEntity.getSoftDelete());
         List<String> names = new ArrayList<>();
         List<CourseEntity> courses = professorEntity.getCourses();

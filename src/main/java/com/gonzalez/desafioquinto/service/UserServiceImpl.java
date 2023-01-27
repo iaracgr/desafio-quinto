@@ -1,12 +1,15 @@
 package com.gonzalez.desafioquinto.service;
 
 
+import com.gonzalez.desafioquinto.config.RoleType;
 import com.gonzalez.desafioquinto.mapper.UserMapper;
+import com.gonzalez.desafioquinto.model.entity.RoleEntity;
 import com.gonzalez.desafioquinto.model.entity.UserEntity;
 import com.gonzalez.desafioquinto.model.request.UpdateUserRequest;
 import com.gonzalez.desafioquinto.model.request.UserRequest;
 import com.gonzalez.desafioquinto.model.response.ListUserResponse;
 import com.gonzalez.desafioquinto.model.response.UserResponse;
+import com.gonzalez.desafioquinto.repository.IRoleRepository;
 import com.gonzalez.desafioquinto.repository.IUserRepository;
 import com.gonzalez.desafioquinto.service.abstraction.IRegisterUser;
 import com.gonzalez.desafioquinto.service.abstraction.IUserService;
@@ -14,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
@@ -28,6 +32,9 @@ public class UserServiceImpl implements IUserService {
 
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
+    IRoleRepository iRoleRepository;
 
 
     private ListUserResponse buildListResponse(List<UserEntity> users) {
@@ -78,9 +85,12 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    @Transactional(rollbackFor = {Exception.class})
     public UserResponse create(UserRequest request) throws EntityExistsException {
         UserEntity user = userMapper.map(request);
-        return userMapper.map(userRepository.save(user));
+        user.setRoles(List.of((iRoleRepository.findByName(RoleType.ADMIN))));
+        UserResponse response = userMapper.map(userRepository.save(user));
+        return response;
     }
 
     @Override
