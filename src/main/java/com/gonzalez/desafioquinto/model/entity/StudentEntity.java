@@ -22,9 +22,6 @@ public class StudentEntity {
     @Column(name = "first_name",nullable = false)
     private String name;
 
-    @Column(name = "role",nullable = false)
-    private String role;
-
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
@@ -40,12 +37,7 @@ public class StudentEntity {
     @Column(name = "history")
     private String history;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "student_courses",
-            joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "course_id")
-    )
+    @ManyToMany(mappedBy = "studentsList")
     private List<CourseEntity> courses;
 
     @Column(name = "course_id")
