@@ -22,13 +22,11 @@ import javax.validation.Valid;
 public class UserController {
 
     @Autowired
-    private IRegisterUser iRegisterUser;
-    @Autowired
     private IUserService iUserService;
 
-    @PostMapping("/professor") //create user as a professor
+    @PostMapping("/create")
     public ResponseEntity<UserResponse> register(@RequestBody @Valid UserRequest request) throws EntityExistsException {
-        UserResponse response = iRegisterUser.registerProfessor(request);
+        UserResponse response = iUserService.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
@@ -43,12 +41,6 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<AuthenticationResponse> login(
-            @RequestBody @Valid AuthenticationRequest request)
-            throws Exception {
-        return ResponseEntity.ok(iUserService.login(request));
-    }
 
     @GetMapping("find/{id}")
     public ResponseEntity<UserResponse> findUser(@PathVariable String id) throws EntityNotFoundException {

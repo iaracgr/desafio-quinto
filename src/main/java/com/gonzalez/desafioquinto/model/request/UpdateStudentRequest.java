@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -22,7 +23,7 @@ public class UpdateStudentRequest {
 
     private List<String> idCourse;
 
-    private String birthday;
+    private Date birthday;
 
     private String history;
 

@@ -25,10 +25,10 @@ public class ProfessorController {
     private IProfessorService iProfessorService;
 
     @PostMapping("/create")
-    public ResponseEntity<ProfessorResponse> create (@PathVariable String idUser){
+    public ResponseEntity<ProfessorResponse> create (ProfessorRequest  request){
         ProfessorResponse response = null;
         try {
-            response = iProfessorService.createProfessor(idUser);
+            response = iProfessorService.create(request);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

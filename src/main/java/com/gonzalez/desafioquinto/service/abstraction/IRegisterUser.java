@@ -9,6 +9,6 @@ import javax.persistence.EntityExistsException;
 
 public interface IRegisterUser {
 
-    UserResponse registerProfessor(UserRequest request) throws EntityExistsException;
+   // UserResponse registerProfessor(UserRequest request) throws EntityExistsException;
 
 }

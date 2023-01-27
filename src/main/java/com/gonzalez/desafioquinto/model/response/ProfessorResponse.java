@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ProfessorResponse {
 
-    private String idUser;
+    private String idProfessor;
 
     private String name;
 

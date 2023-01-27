@@ -17,13 +17,7 @@ public class UserResponse {
 
     private String email;
 
-    private String role;
-
     private String description;
-
-    private String token;
-
-    private String password;
 
     private Boolean softDelete;
 

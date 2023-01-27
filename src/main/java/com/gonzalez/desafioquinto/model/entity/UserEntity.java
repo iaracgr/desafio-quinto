@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name="users")
-public class UserEntity implements UserDetails { //
+public class UserEntity implements UserDetails { // is for Admin creation
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -26,16 +26,9 @@ public class UserEntity implements UserDetails { //
     @Column(name = "first_name",nullable = false)
      private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "role_id", nullable = false)
-    private List<RoleEntity> roles;
-
-
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password")
-    private String password;
 
     @Column (name = "description")
     private String description;

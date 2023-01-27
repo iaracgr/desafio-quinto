@@ -13,22 +13,20 @@ import java.util.List;
 
 public interface IProfessorService {
 
-   // ProfessorResponse create (ProfessorRequest request) throws Exception;
+    ProfessorResponse create(ProfessorRequest request) throws Exception;
 
-    ProfessorResponse createProfessor (String idUser) throws Exception;
+    ProfessorResponse addProfessorToCourse(String idProfessor, String idCourse) throws Exception;
 
-    ProfessorResponse addProfessorToCourse (String idProfessor, String idCourse) throws Exception;
+    ProfessorResponse removeProfessorFromCourse(String idProfessor, String idCourse) throws Exception;
 
-    ProfessorResponse removeProfessorFromCourse ( String idProfessor, String idCourse) throws Exception;
+    ProfessorResponse update(UpdateProfessorRequest request);
 
-    ProfessorResponse update (UpdateProfessorRequest request);
-
-    ListProfessorResponse getProfessors ();
+    ListProfessorResponse getProfessors();
 
     ProfessorResponse getByNameAndSoftDeleteFalse(String name) throws EntityNotFoundException;
 
-    ProfessorEntity getByIdAndSoftDeleteFalse (String id) throws EntityNotFoundException;
+    ProfessorEntity getByIdAndSoftDeleteFalse(String id) throws EntityNotFoundException;
 
-    void deleteProfessor (String id) throws EntityNotFoundException;
+    void deleteProfessor(String id) throws EntityNotFoundException;
 
 }

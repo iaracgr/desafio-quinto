@@ -17,15 +17,13 @@ public class UserMapper {
         userResponse.setName(user.getName());
         userResponse.setEmail(user.getEmail());
         userResponse.setDescription(user.getDescription());
-        userResponse.setRole(user.getRoles().get(0).getName());
         return userResponse;
     }
 
-    public UserEntity map(UserRequest request, String passwordEncrypted) {
+    public UserEntity map(UserRequest request) {
         UserEntity userRegister = new UserEntity();
         userRegister.setName(request.getName());
         userRegister.setEmail(request.getEmail());
-        userRegister.setPassword(passwordEncrypted);
         return userRegister;
     }
     public List<UserResponse> map(List<UserEntity> users) {

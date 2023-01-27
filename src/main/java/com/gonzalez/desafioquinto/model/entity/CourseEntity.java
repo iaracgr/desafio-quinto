@@ -33,13 +33,23 @@ public class CourseEntity {
     @Column(name = "schedule") // horario
     private String schedule;
 
-    @JoinColumn(name = "course_id")
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<StudentEntity> studentsList = new ArrayList<>();
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.PERSIST},
+            fetch = FetchType.LAZY )
+    @JoinTable(
+            name = "student_courses",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    private List<StudentEntity> studentsList = new ArrayList<StudentEntity>();
 
-    @JoinColumn(name = "course_id")
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<ProfessorEntity> professorsList =new ArrayList<>();
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.PERSIST},
+            fetch = FetchType.LAZY )
+    @JoinTable(
+            name = "professor_courses",
+            joinColumns = @JoinColumn(name = "professor_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    private List<ProfessorEntity> professorsList =new ArrayList<ProfessorEntity>();
 
     @Column(name = "soft_delete",nullable = false)
     private Boolean softDelete=false;

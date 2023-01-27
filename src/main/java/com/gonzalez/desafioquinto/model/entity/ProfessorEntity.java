@@ -20,14 +20,8 @@ public class ProfessorEntity {
     @Column(name = "professor_id")
     private   String professorId;
 
-  /*  @Column(name = "professor_id")
-    private   String professorId;*/
-
     @Column(name = "first_name",nullable = false)
     private String name;
-
-    @Column(name = "role",nullable = false)
-    private String role;
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
@@ -41,24 +35,11 @@ public class ProfessorEntity {
     @Column(name = "surname", nullable = false)
     private String surname;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "professor_courses",
-            joinColumns = @JoinColumn(name = "professor_id"),
-            inverseJoinColumns = @JoinColumn(name = "course_id")
-    )
+    @Column( name = "role", nullable = false)
+    private String role;
+
+    @ManyToMany(mappedBy = "studentsList")
     private List<CourseEntity> courses = new ArrayList<>();
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "professors_users",
-            joinColumns = @JoinColumn(name = "professor_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private List<UserEntity> users;
-
-    @Column(name = "user_id")
-    private String user_id;
 
     @Column(name = "course_id")
     private String courseId;
