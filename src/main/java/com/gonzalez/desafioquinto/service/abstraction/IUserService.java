@@ -21,7 +21,7 @@ public interface IUserService {
     UserResponse update(UpdateUserRequest updateUserRequest) throws Exception;
 
     //UserResponse create(UserRequest request) throws EntityExistsException;
-    AuthenticationResponse login(AuthenticationRequest request)throws Exception;
+    //AuthenticationResponse login(AuthenticationRequest request)throws Exception;
 
     void delete(String id) throws EntityNotFoundException;
 
