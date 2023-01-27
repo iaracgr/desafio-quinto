@@ -35,19 +35,11 @@ public class ProfessorEntity {
     @Column(name = "surname", nullable = false)
     private String surname;
 
+    @Column( name = "role", nullable = false)
+    private String role;
+
     @ManyToMany(mappedBy = "studentsList")
     private List<CourseEntity> courses = new ArrayList<>();
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "professors_users",
-            joinColumns = @JoinColumn(name = "professor_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private List<UserEntity> users;
-
-    @Column(name = "user_id")
-    private String user_id;
 
     @Column(name = "course_id")
     private String courseId;

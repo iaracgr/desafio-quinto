@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name="users")
-public class UserEntity implements UserDetails { //
+public class UserEntity implements UserDetails { // is for Admin creation
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -29,8 +29,6 @@ public class UserEntity implements UserDetails { //
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password")
-    private String password;
 
     @Column (name = "description")
     private String description;

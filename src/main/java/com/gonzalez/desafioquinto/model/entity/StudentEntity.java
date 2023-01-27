@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity(name = "student")
@@ -32,10 +33,14 @@ public class StudentEntity {
     private String age;
 
     @Column(name = "birthday")
-    private String birthday; // todo:change to calendar type
+    @Temporal(TemporalType.DATE)
+    private Date birthday; // todo:change to calendar type
 
     @Column(name = "history")
     private String history;
+
+    @Column( name = "role", nullable = false)
+    private String role;
 
     @ManyToMany(mappedBy = "studentsList")
     private List<CourseEntity> courses;
